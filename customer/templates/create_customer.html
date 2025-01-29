@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Customer | COCRM</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #f8f9fb, #e3e7eb);
+            padding-top: 90px;
+            color: #333;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 30px;
+            background: #2d4059;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .header-buttons a {
+            margin-left: 15px;
+            background: #00897b;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out;
+        }
+
+        .header-buttons a:hover {
+            background: #00796b;
+        }
+
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 90%;
+            max-width: 650px;
+            margin: 70px auto;
+            text-align: center;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #2d4059;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #444;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            width: 100%;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #00897b;
+            box-shadow: 0 0 6px rgba(0, 137, 123, 0.3);
+        }
+
+        button {
+            padding: 14px;
+            font-size: 16px;
+            color: white;
+            background: #00897b;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #00796b;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #4caf50;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+
+        footer {
+            background: #2d4059;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-size: 14px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer a {
+            color: #ffc107;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>TealCRM</h1>
+        <div class="header-buttons">
+            <a href="{% url 'customer_dashboard' %}">Dashboard</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Create New Customer</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" required>
+
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" required>
+
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state" required>
+
+            <label for="country">Country:</label>
+            <input type="text" name="country" id="country" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" id="phone" required>
+
+            <button type="submit">Create Customer</button>
+        </form>
+
+        {% if messages %}
+            <div class="message">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        &copy; 2025 COCRM. <a href="#">Privacy Policy</a>
+    </footer>
+
+</body>
+</html>
