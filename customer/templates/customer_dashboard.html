@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard | COCRM</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(120deg, #ffffff, #f0f4f8);
+            padding-top: 90px;
+            color: #333;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .header-buttons a {
+            margin-left: 10px;
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .header-buttons a:hover {
+            background-color: #45a049;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 4px;
+            margin: 5px;
+            background: white;
+            border-radius: 4px;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            font-size: 30px;
+            color: #2e3b44;
+            margin: 30px 0 20px;
+        }
+
+        .dashboard-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding-bottom: 30px;
+            justify-content: center;
+        }
+
+        .section {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 45%;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #00796b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #004d40;
+        }
+
+        .cta-button.delete {
+            background-color: #d32f2f;
+        }
+
+        .cta-button.delete:hover {
+            background-color: #c62828;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .header-buttons {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 10px;
+                background-color: #3d4c57;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                width: 180px;
+            }
+
+            .header-buttons.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .section {
+                width: 100%;
+            }
+        }
+
+        footer {
+            background: #2b3a42;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>COCRM Dashboard</h1>
+        <p>Welcome back, {{ user.username }}!</p>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="header-buttons">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'AboutUs' %}">About Us</a>
+            <a href="{% url 'create_ticket' %}">Create Ticket</a>
+            <a href="{% url 'create_customer' %}">Add Customer</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        </div>
+    </div>
+
+    <main>
+        <h2 class="dashboard-title">Your Customer Management Hub</h2>
+
+        <div class="dashboard-section">
+            {% for detail in details %}
+                <div class="section">
+                    <h3>Customer Overview</h3>
+                    <p><strong>Name:</strong> {{ detail.name }}</p>
+                    <p><strong>City:</strong> {{ detail.city }}</p>
+                    <div class="action-buttons">
+                        <a href="{% url 'edit_customer' detail.id %}" class="cta-button">Edit</a>
+                        <a href="{% url 'delete_customer' detail.id %}" class="cta-button delete">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 COCRM. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.header-buttons').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
