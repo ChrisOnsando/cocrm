@@ -3,9 +3,9 @@ from .models import (
     CustomerUserProfile,
     Customer_details,
 )
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
-
+from django.contrib import messages
 
 def customer_signup(request):
     if request.method == 'POST':
@@ -70,3 +70,19 @@ def create_customer(request):
         newCustomer.save()
         return redirect('customer_dashboard')
     return render(request, 'create_customer.html')
+
+def edit_customer(request, customer_id):
+    customer = get_object_or_404(Customer_details, id=customer_id)
+
+    if request.method == "POST":
+        customer.name = request.POST.get('name')
+        customer.city = request.POST.get('city')
+        customer.state = request.POST.get('state')
+        customer.country = request.POST.get('country')
+        customer.phone = request.POST.get('phone')
+        customer.save()
+
+        messages.success(request, "Customer updated successfully!")
+        return redirect('customer_dashboard')  
+
+    return render(request, 'edit_customer.html', {'customer': customer})
