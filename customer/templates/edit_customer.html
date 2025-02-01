@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Customer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 6px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.3);
+        }
+
+        button {
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
+            border: none;
+            padding: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #45a049, #2e7d32);
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-actions a {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #388E3C;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .form-actions a:hover {
+            color: #2e7d32;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Customer Details</h2>
+        <form action="{% url 'edit_customer' customer.id %}" method="POST">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="name" value="{{ customer.name }}" required>
+
+            <label for="city">City:</label>
+            <input type="text" name="city" id="city" value="{{ customer.city }}" required>
+
+            <label for="state">State:</label>
+            <input type="text" name="state" id="state" value="{{ customer.state }}" required>
+
+            <label for="country">Country:</label>
+            <input type="text" name="country" id="country" value="{{ customer.country }}" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" id="phone" value="{{ customer.phone }}" required>
+
+            <button type="submit">Save Changes</button>
+
+            <div class="form-actions">
+                <a href="{% url 'customer_dashboard' %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.querySelector('.mobile-nav');
+            mobileNav.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
