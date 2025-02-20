@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - COCRM</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #2b3a42, #3d4c57);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 10px auto;
+        }
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .section h2 {
+            color: #2b3a42;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .team-member img {
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+        .contact-section {
+            background-color: #2b3a42;
+            color: white;
+            padding: 50px 20px;
+        }
+        .contact-section p, .contact-section a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        footer {
+            background-color: #222;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>About Us</h1>
+        <p>Empowering businesses with powerful customer relationship management tools.</p>
+    </div>
+
+    <div class="container">
+        <!-- Mission Section -->
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>Helping businesses build meaningful relationships with customers through automation and innovation.</p>
+        </div>
+
+        <!-- Values Section -->
+        <div class="section bg-light">
+            <h2>Our Values</h2>
+            <p>We prioritize innovation, transparency, and user satisfaction in all our solutions.</p>
+        </div>
+
+      
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section text-center">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:cocrm@gmail.com">cocrm@gmail.com</a></p>
+        <p>Phone: +254700000000</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 COCRM. All rights reserved.</p>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'AboutUs' %}">About Us</a> |
+        <a href="{% url 'services' %}">Services</a> |
+        <a href="{% url 'ContactUs' %}">Contact Us</a>
+    </footer>
+</body>
+</html>
+
