@@ -24,3 +24,23 @@ class Lead(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+class Interaction(models.Model):
+    CALL = 'Call'
+    EMAIL = 'Email'
+    MEETING = 'Meeting'
+
+    INTERACTION_TYPE_CHOICES = [
+        (CALL, 'Call'),
+        (EMAIL, 'Email'),
+        (MEETING, 'Meeting'),
+    ]
+
+    lead = models.ForeignKey(Lead, related_name='interactions', on_delete=models.CASCADE)
+    interaction_type = models.CharField(max_length=100, choices=INTERACTION_TYPE_CHOICES)  
+    date = models.DateField()
+    notes = models.TextField()
+
+    def __str__(self):
+        return f"{self.interaction_type} on {self.date}"
+    
