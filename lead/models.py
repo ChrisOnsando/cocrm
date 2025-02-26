@@ -43,4 +43,23 @@ class Interaction(models.Model):
 
     def __str__(self):
         return f"{self.interaction_type} on {self.date}"
-    
+
+class Reply(models.Model):
+    interaction = models.ForeignKey(Interaction, related_name='replies', on_delete=models.CASCADE)
+    reply_text = models.TextField()
+    replied_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Reply to {self.interaction}"
+
+class Task(models.Model):
+    lead = models.ForeignKey('Lead', related_name='tasks', on_delete=models.CASCADE,null=True)
+    title = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    due_date = models.DateField()
+    completed = models.BooleanField(default=False)
+    assigned_to = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.title} for {self.lead.first_name} {self.lead.last_name}"
+        
